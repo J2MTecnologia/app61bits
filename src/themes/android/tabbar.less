@@ -1,0 +1,90 @@
+/* ==============================
+   Tab Bar
+   =========================== */
+
+@tabbarMoreSVG: escape('<svg width="39px" height="11px" viewBox="0 0 39 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="more" fill="@{buttonTextHoverColor}"><circle id="Oval" cx="5.172" cy="5.172" r="5.172"></circle><circle id="Oval" cx="19.172" cy="5.172" r="5.172"></circle><circle id="Oval" cx="33.172" cy="5.172" r="5.172"></circle></g></g></svg>');
+@tabbarMoreSVGSelected: escape('<svg width="39px" height="11px" viewBox="0 0 39 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="more" fill="@{buttonTextColor}"><circle id="Oval" cx="5.172" cy="5.172" r="5.172"></circle><circle id="Oval" cx="19.172" cy="5.172" r="5.172"></circle><circle id="Oval" cx="33.172" cy="5.172" r="5.172"></circle></g></g></svg>');
+body.hasTabBar article {
+  top: 77px !important;
+
+  .previous:not(.navigable), & .next:not(.navigable) {
+    display: none;
+    -webkiit-transform: none;
+  }
+}
+
+.tabbar {
+  /* Old syntax */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+  .box-sizing(border-box);
+  height: 30px;
+  position: absolute;
+  left: 0;
+  top: 47px;
+  right: 0;
+  border-top: solid 1px @tabbarColor;
+  background-color: @tabbarColor;
+}
+.tabbar > .button {
+  color: @buttonTextHoverColor !important;
+  background-color: @tabbarColor !important;
+  position: relative;
+  display: block !important;
+  #flex > .flex(1) !important;
+  margin: 0;
+  height: 100%;
+  text-align: center;
+  line-height: 17px;
+  padding: 4px 10px;
+  border: none;
+  border-bottom: solid 4px @tabbarColor;
+  border-right: solid 1px @tabbarButtonBorder;
+  box-shadow: none;
+
+  &:last-of-type {
+    border-right: none;
+  }
+
+  .isDesktop &:hover {
+    opacity: 1 !important;
+    box-shadow: none !important;
+    border-bottom: solid 4px darken(@appTint,20%);
+    background-color: desaturate(darken(@appTint,25%), 35%) !important;    
+  }
+
+  &.selected {
+    color: @buttonTextColor !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    border-bottom: solid 4px darken(@appTint,20%);
+  }
+
+  &.more {
+    font-size: 0;
+    border-left: solid 1px @tabbarButtonBorder;
+    #flex > .display(flex);
+    #flex > .flex-direction(column);
+    #flex > .justify-content(center);
+    #flex > .align-items(center);
+
+    &::before {
+      content: '';
+      display: block;
+      height: 20px;
+      background-image: url("@{imageMaskRoot}@{tabbarMoreSVG}");
+      background-position: 50% 50%;
+      background-size: 40% 40%;
+      background-repeat: no-repeat;
+    }
+    &.selected::before {
+      background-image: url("@{imageMaskRoot}@{tabbarMoreSVGSelected}");
+    }
+  }
+
+  > span, & > .icon {
+    display: block;
+    #flex > .flex(1) !important;
+  }
+}

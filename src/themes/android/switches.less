@@ -1,0 +1,75 @@
+/* ==============================
+   Switch
+   =========================== */
+.switch {
+  display: inline-block;
+  .size(70px, 24px);
+  border: 1px solid @switchBorder;
+  background-color: @switchBkgnd;
+  #flex > .display(inline-flex);
+  #flex > .flex-direction(row);
+  #flex > .justify-content(space-around);
+  .box-sizing(border-box);
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -webkit-animation-duration: .65s;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-name: switchAnimationOff;
+  user-select: none;
+  animation-duration: .65s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-name: switchAnimationOff;
+
+  .isDesktop &:hover {
+    box-shadow: 0 0 2px 2px @appTint;
+  }
+
+  > em {
+    display: block;
+    position: relative;
+    z-index: 30;
+    top: -1px;
+    border: solid 1px @switchThumbBorder;
+    border-top: solid 3px @buttonTopColor;
+    .size(30px, 22px);
+    background-color: @switchThumbBkgnd;
+    pointer-events: none;
+     .transform(translate3d(-1px,0,0));
+    .transition(all .1s ease-in-out);
+  }
+
+  &.on {
+    border-color: @switchOnColor;
+
+    > em {
+      .transform(translate3d(36px,0,0));
+      background-color: @appTint;
+      border: solid 1px @appTint;
+      border-top: solid 3px @switchOnTop;
+      border-left-color: @switchOnColor;
+    }
+  }
+
+  > input {
+    display: none;
+  }
+}
+
+html[dir=rtl] {
+  .switch {
+
+    &.on {
+    
+      > em {
+        .transform(translate3d(-36px,0,0));
+      }
+    }
+    > em {
+      .transform(translate3d(2px,0,0));
+    }
+  }
+}
